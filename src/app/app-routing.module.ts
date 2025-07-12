@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
 import { MydashboardComponent } from './demo/components/mydashboard/mydashboard.component';
-import { WorkshoplistComponent } from './demo/components/workshop/workshoplist/workshoplist.component';
-import { WorkshopFormComponent } from './demo/components/workshop/workshop-form/workshop-form.component';
-import { WorkshopDetailsComponent } from './demo/components/workshop/workshop-details/workshop-details.component';
-import { ResourceListComponent } from './demo/components/resource/resource-list/resource-list.component';
-import { ResourceFormComponent } from './demo/components/resource/resource-form/resource-form.component';
-import { ResourceDetailsComponent } from './demo/components/resource/resource-details/resource-details.component';
+
+
+
+
+
+
 
 @NgModule({
     imports: [
@@ -26,21 +26,8 @@ import { ResourceDetailsComponent } from './demo/components/resource/resource-de
                     // Dashboard
                     { path: 'mydashboard', component: MydashboardComponent },
 
-                    // Workshops Routes
-                    { path: 'workshops', 
-                        children: [
-                            { path: '', component: WorkshoplistComponent },  // List Workshops
-                            { path: 'new', component: WorkshopFormComponent },  // Add New Workshop
-                            { path: ':id/edit', component: WorkshopFormComponent },  // Edit Workshop
-                            { path: ':id', component: WorkshopDetailsComponent }  // Workshop Details
-                        ]
-                    },
+                    
 
-                    // Resources Routes inside Workshops
-                    { path: 'workshops/:workshopId/resources', component: ResourceListComponent },  // List Resources
-                    { path: 'workshops/:workshopId/resources/new', component: ResourceFormComponent },  // Add Resource
-                    { path: 'workshops/:workshopId/resources/:resourceId/edit', component: ResourceFormComponent },  // Edit Resource
-                    { path: 'workshops/:workshopId/resources/:resourceId', component: ResourceDetailsComponent },  // Resource Details
                 ],
             },
 

@@ -1,74 +1,42 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/demo/services/auth.service';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../../services/auth.service';
+import { AuthRequest } from '../../../models/auth-request.model';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styles: [`
-        :host ::ng-deep .p-password input {
-            width: 100%;
-            padding:1rem;
-        }
-
-        :host ::ng-deep .pi-eye{
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-
-        :host ::ng-deep .pi-eye-slash{
-            transform:scale(1.6);
-            margin-right: 1rem;
-            color: var(--primary-color) !important;
-        }
-    `]
+  selector: 'app-login',
+  standalone: true,
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatSelectModule, MatSlideToggleModule, MatDividerModule, MatIconModule],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  authRequest: AuthRequest = { email: '', password: '' };
+  rememberMe: boolean = false;
+  errorMessage: string = '';
+  hidePassword: boolean = true;
 
-    valCheck: string[] = ['remember'];
+  constructor(private authService: AuthService, private router: Router) {}
 
-  //  password!: string;
-
-    name: string = '';
-    password: string = '';
-    token: string = "";
-    error: string | null = null;
-
-  constructor(private authService: AuthService, public layoutService: LayoutService, private router: Router) {}
-
-  onSignIn(): void {
-    this.authService.login(this.name, this.password).subscribe({
+  onSubmit(): void {
+    this.authService.login(this.authRequest).subscribe({
       next: (response) => {
-
-        if (response.jwtToken) {
-          this.token = response.jwtToken; 
-          this.authService.storeToken(this.token); 
-          console.log('Token received:', this.token);
-          this.router.navigate(['/mydashboard']);
-        } else {
-          console.error('JWT token is not in the response');
-        }
+        this.authService.setToken(response.token);
+        this.router.navigate(['/user-list']);
       },
       error: (err) => {
-        this.error = 'Login failed';
-        console.error('Error during login:', err);
+        this.errorMessage = err.message;
       }
     });
   }
-
-
-    // Mock sign-in method
-//    onSignIn() {
-        // Perform your sign-in logic here
-
-        // Example sign-in success
-  //      const isSignInSuccessful = true;  // Replace this logic with real authentication
-
-    //    if (isSignInSuccessful) {
-            // Navigate to the 'mydashboard' route upon successful sign-in
-      //      this.router.navigate(['/mydashboard']);
-       // }
-   // }
 }

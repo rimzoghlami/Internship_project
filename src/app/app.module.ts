@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -13,7 +15,6 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 
 //New TODO mydasboard
-import { MydashboardComponent } from './demo/components/mydashboard/mydashboard.component';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -27,24 +28,20 @@ import { ToastModule } from 'primeng/toast';
 import { SliderModule } from 'primeng/slider';
 import { RatingModule } from 'primeng/rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { WorkshoplistComponent } from './demo/components/workshop/workshoplist/workshoplist.component';
-import { WorkshopFormComponent } from './demo/components/workshop/workshop-form/workshop-form.component';
-import { WorkshopDetailsComponent } from './demo/components/workshop/workshop-details/workshop-details.component';
-import { ResourceListComponent } from './demo/components/resource/resource-list/resource-list.component';
-import { ResourceFormComponent } from './demo/components/resource/resource-form/resource-form.component';
-import { ResourceDetailsComponent } from './demo/components/resource/resource-details/resource-details.component';
 import { RouterModule } from '@angular/router';
 import { CardModule } from 'primeng/card';
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent, MydashboardComponent, WorkshoplistComponent, WorkshopFormComponent, WorkshopDetailsComponent, ResourceListComponent, ResourceFormComponent, ResourceDetailsComponent
+        AppComponent, NotfoundComponent
     ],
     imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
         AppRoutingModule,
         AppLayoutModule,
         TableModule,
-        CommonModule,
+        // BrowserModule already exports CommonModule, so no need to add CommonModule separately
         RatingModule,
         ButtonModule,
         SliderModule,
@@ -59,8 +56,6 @@ import { CardModule } from 'primeng/card';
         ReactiveFormsModule,
         RouterModule,
         CardModule,
-        ButtonModule,
-        InputTextModule,
     ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
