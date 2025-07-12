@@ -515,7 +515,6 @@
   }
 }
 
-<<<<<<< HEAD
 @import 'src/app/demo/styles/auth-shared';
 
 .auth-container {
@@ -599,84 +598,42 @@
     align-items: center;
     cursor: pointer;
 
-=======
-/* Terms checkbox styling */
-.terms-agreement {
-  margin: 1.5rem 0;
-  label {
-    display: flex;
-    align-items: center;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9rem;
-    cursor: pointer;
-    
->>>>>>> origin/oumaima
     input {
       opacity: 0;
       position: absolute;
     }
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> origin/oumaima
     .checkmark {
       display: inline-block;
       width: 18px;
       height: 18px;
-<<<<<<< HEAD
       background: rgba(255, 255, 255, 0.1);
       border-radius: 4px;
       margin-right: 8px;
       position: relative;
       transition: all 0.3s ease;
 
-=======
-      border: 2px solid rgba(255,255,255,0.3);
-      border-radius: 4px;
-      margin-right: 10px;
-      position: relative;
-      transition: all 0.3s ease;
-      
->>>>>>> origin/oumaima
       &::after {
         content: '';
         position: absolute;
         display: none;
-<<<<<<< HEAD
         left: 6px;
         top: 2px;
         width: 5px;
         height: 10px;
         border: solid white;
-=======
-        left: 5px;
-        top: 1px;
-        width: 5px;
-        height: 10px;
-        border: solid #00ffcc;
->>>>>>> origin/oumaima
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
       }
     }
-<<<<<<< HEAD
 
     input:checked ~ .checkmark {
       background: #6e45e2;
 
-=======
-    
-    input:checked ~ .checkmark {
-      background: rgba(0,255,204,0.1);
-      border-color: #00ffcc;
-      
->>>>>>> origin/oumaima
       &::after {
         display: block;
       }
     }
-<<<<<<< HEAD
 
     a {
       color: white;
@@ -684,14 +641,6 @@
       margin: 0 4px;
       transition: all 0.3s ease;
 
-=======
-    
-    a {
-      color: #00ffcc;
-      text-decoration: none;
-      margin: 0 5px;
-      
->>>>>>> origin/oumaima
       &:hover {
         text-decoration: underline;
       }
@@ -699,7 +648,6 @@
   }
 }
 
-<<<<<<< HEAD
 .toggle-password {
   cursor: pointer;
   transition: all 0.3s ease;
@@ -707,25 +655,10 @@
 
   &:hover {
     color: white;
-=======
-/* Additional name fields styling */
-.name-fields {
-  display: flex;
-  gap: 1rem;
-  
-  .input-group {
-    flex: 1;
->>>>>>> origin/oumaima
   }
 }
 
 @keyframes shine {
   0% { transform: translateX(-100%) rotate(30deg); }
   100% { transform: translateX(100%) rotate(30deg); }
-<<<<<<< HEAD
 }
-=======
-}
-
-@import 'src/app/demo/styles/auth-shared';
->>>>>>> origin/oumaima
