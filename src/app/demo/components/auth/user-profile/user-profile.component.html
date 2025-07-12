@@ -1,0 +1,97 @@
+<div class="auth-container">
+  <div class="particles"></div>
+
+  <div class="auth-card">
+    <div class="card-border"></div>
+
+    <div class="card-content">
+      <!-- Header -->
+      <div class="auth-header">
+        <h1>Edit Your Profile</h1>
+        <p>Keep your information up to date</p>
+      </div>
+
+      <!-- Avatar Upload -->
+      <div class="avatar-container">
+  <div class="avatar-wrapper">
+    <img [src]="user.avatar || 'src/assets/demo/images/avatar/p.png' " class="avatar-preview" alt="Avatar">
+    <label for="avatarUpload" class="avatar-upload">
+      <i class="pi pi-camera"></i>
+    </label>
+  </div>
+  <input type="file" id="avatarUpload" (change)="onAvatarChange($event)" accept="image/*" hidden>
+</div>
+
+      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
+        <!-- Name Row -->
+        
+        <div class="form-row">
+  <div class="form-group">
+    <label for="firstName">First Name</label>
+    <div class="input-group">
+      <i class="pi pi-user input-icon"></i>
+      <input type="text" class="register-input" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="lastName">Last Name</label>
+    <div class="input-group">
+      <i class="pi pi-user input-icon"></i>
+      <input type="text" class="register-input" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
+    </div>
+  </div>
+</div>
+
+
+        <!-- Email -->
+        <!-- Email -->
+  <div class="form-group">
+    <label for="email">Email</label>
+    <div class="input-group">
+      <i class="pi pi-envelope input-icon"></i>
+      <input type="email" class="register-input" id="email" [(ngModel)]="user.email" name="email" readonly>
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="form-group">
+    <label for="password">New Password</label>
+    <div class="input-group">
+      <i class="pi pi-lock input-icon"></i>
+      <input [type]="hidePassword ? 'password' : 'text'" class="register-input password-input" id="password" [(ngModel)]="user.password" name="password">
+      <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
+      </button>
+    </div>
+  </div>
+
+  <!-- Phone Number -->
+  <div class="form-group">
+    <label for="phoneNumber">Phone Number</label>
+    <div class="input-group">
+      <i class="pi pi-phone input-icon"></i>
+      <input type="text" class="register-input" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" (blur)="checkPhone()">
+    </div>
+    <div *ngIf="phoneError" class="error-message">{{ phoneError }}</div>
+  </div>
+
+  <!-- Address -->
+  <div class="form-group">
+    <label for="address">Address</label>
+    <div class="input-group">
+      <i class="pi pi-home input-icon"></i>
+      <input type="text" class="register-input" id="address" [(ngModel)]="user.address" name="address">
+    </div>
+  </div>
+        <!-- Submit Button -->
+        <button class="auth-button" type="submit" [disabled]="phoneError">
+          <span>Update Profile</span>
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <a routerLink="/dashboard">← Back to Dashboard</a>
+      </div>
+    </div>
+  </div>
+</div>

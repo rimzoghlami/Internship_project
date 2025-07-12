@@ -1,0 +1,80 @@
+<div class="login-container">
+  <div class="particles"></div>
+  
+  <div class="login-card">
+    <div class="card-border"></div>
+    
+    <div class="card-content">
+      <div class="logo-container">
+        <img src="assets/images/logo.svg" class="app-logo" alt="App Logo">
+      </div>
+      
+      <div class="login-header">
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue your journey</p>
+      </div>
+      
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <div class="input-group">
+          <input type="text" class="login-input" id="email" [(ngModel)]="authRequest.email" name="email" required autocomplete="email">
+          <label for="email">Email</label>
+          <i class="material-icons">email</i>
+        </div>
+        
+        <div class="input-group">
+          <input [type]="hidePassword ? 'password' : 'text'" class="login-input" id="password" [(ngModel)]="authRequest.password" name="password" required autocomplete="current-password">
+          <label for="password">Password</label>
+          <i class="material-icons">lock</i>
+          <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
+            <i class="material-icons">{{hidePassword ? 'visibility_off' : 'visibility'}}</i>
+          </button>
+        </div>
+        
+        <div class="login-options">
+          <label class="remember-me">
+            <input type="checkbox" [(ngModel)]="authRequest.rememberMe" name="rememberMe">
+            <span class="checkmark"></span>
+            Remember me
+          </label>
+          <a routerLink="/forgot-password" class="forgot-password">Forgot password?</a>
+        </div>
+        
+        <button class="sign-in-button" type="submit" [disabled]="loginForm.invalid">
+          <span>Sign In</span>
+          <i class="material-icons">arrow_forward</i>
+        </button>
+      </form>
+      
+      <div class="divider">
+        <span>OR</span>
+      </div>
+      
+      <div class="social-login">
+        <button class="social-button google">
+          <i class="fab fa-google"></i>
+        </button>
+        <button class="social-button apple">
+          <i class="fab fa-apple"></i>
+        </button>
+        <button class="social-button fingerprint">
+          <i class="material-icons">fingerprint</i>
+        </button>
+      </div>
+      
+      <div class="register-link">
+        <span>New here?</span>
+        <a routerLink="/register">Create an account</a>
+      </div>
+      
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+    </div>
+  </div>
+  
+  <div class="theme-toggle">
+    <input type="checkbox" id="dark-mode-toggle">
+    <label for="dark-mode-toggle">
+      <i class="material-icons">brightness_4</i>
+      <i class="material-icons">brightness_7</i>
+    </label>
+  </div>
+</div>
