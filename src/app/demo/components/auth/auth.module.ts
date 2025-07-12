@@ -14,8 +14,18 @@ import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [
+        UserListComponent,
+        ForgotPasswordComponent,
         CommonModule,
-        AuthRoutingModule
-    ]
+        AuthRoutingModule,
+        DropdownModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatCardModule,
+        MatTableModule,
+        MatSelectModule
+    ],
+    declarations: []
 })
 export class AuthModule { }
