@@ -515,59 +515,132 @@
   }
 }
 
-/* Terms checkbox styling */
+@import 'src/app/demo/styles/auth-shared';
+
+.auth-container {
+  // Particle grid background
+  background: 
+    linear-gradient(rgba(20, 20, 40, 0.9), rgba(20, 20, 40, 0.9)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='100' cy='100' r='0.5' fill='%236e8efb' opacity='0.2'/%3E%3C/svg%3E") center/20px 20px;
+  
+  // Grid animation
+  animation: gridScroll 100s linear infinite;
+}
+
+@keyframes gridScroll {
+  from { background-position: 0 0; }
+  to { background-position: 1000px 1000px; }
+}
+
+// Neon text glow
+.auth-header h2 {
+  text-shadow: 0 0 10px rgba(110, 142, 251, 0.8);
+  animation: pulseGlow 3s ease infinite alternate;
+}
+
+@keyframes pulseGlow {
+  from { text-shadow: 0 0 10px rgba(110, 142, 251, 0.8); }
+  to { text-shadow: 0 0 20px rgba(110, 142, 251, 1); }
+}
+
+.holographic-indicator {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 60px;
+  z-index: 10;
+  
+  .holographic-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #6e8efb, transparent);
+    transform: translateX(-50%);
+    animation: scanLine 4s ease infinite;
+  }
+  
+  .holographic-dot {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: #6e8efb;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 0 5px #6e8efb);
+    animation: pulseDot 2s ease infinite alternate;
+  }
+  
+  @keyframes scanLine {
+    0% { top: 0; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+  
+  @keyframes pulseDot {
+    from { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    to { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+  }
+}
+
 .terms-agreement {
   margin: 1.5rem 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+
   label {
     display: flex;
     align-items: center;
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9rem;
     cursor: pointer;
-    
+
     input {
       opacity: 0;
       position: absolute;
     }
-    
+
     .checkmark {
       display: inline-block;
       width: 18px;
       height: 18px;
-      border: 2px solid rgba(255,255,255,0.3);
+      background: rgba(255, 255, 255, 0.1);
       border-radius: 4px;
-      margin-right: 10px;
+      margin-right: 8px;
       position: relative;
       transition: all 0.3s ease;
-      
+
       &::after {
         content: '';
         position: absolute;
         display: none;
-        left: 5px;
-        top: 1px;
+        left: 6px;
+        top: 2px;
         width: 5px;
         height: 10px;
-        border: solid #00ffcc;
+        border: solid white;
         border-width: 0 2px 2px 0;
         transform: rotate(45deg);
       }
     }
-    
+
     input:checked ~ .checkmark {
-      background: rgba(0,255,204,0.1);
-      border-color: #00ffcc;
-      
+      background: #6e45e2;
+
       &::after {
         display: block;
       }
     }
-    
+
     a {
-      color: #00ffcc;
+      color: white;
       text-decoration: none;
-      margin: 0 5px;
-      
+      margin: 0 4px;
+      transition: all 0.3s ease;
+
       &:hover {
         text-decoration: underline;
       }
@@ -575,13 +648,13 @@
   }
 }
 
-/* Additional name fields styling */
-.name-fields {
-  display: flex;
-  gap: 1rem;
-  
-  .input-group {
-    flex: 1;
+.toggle-password {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 0.5rem;
+
+  &:hover {
+    color: white;
   }
 }
 
@@ -589,5 +662,3 @@
   0% { transform: translateX(-100%) rotate(30deg); }
   100% { transform: translateX(100%) rotate(30deg); }
 }
-
-@import 'src/app/demo/styles/auth-shared';

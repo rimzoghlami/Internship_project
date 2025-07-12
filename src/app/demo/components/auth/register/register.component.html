@@ -1,112 +1,76 @@
 <div class="auth-container">
-  <div class="particles"></div>
-  
+  <div class="holographic-indicator">
+    <div class="holographic-line"></div>
+    <div class="holographic-dot"></div>
+  </div>
   <div class="auth-card">
-    <div class="card-border"></div>
-    
     <div class="card-content">
-      <div class="logo-container">
-        <img src="assets/images/logo.svg" class="app-logo" alt="App Logo">
-      </div>
-      
       <div class="auth-header">
-        <h1>Create Account</h1>
-        <p>Start your journey with us</p>
+        <h2>Create Account</h2>
+        <p>Join our community today</p>
       </div>
       
       <form (ngSubmit)="onSubmit()" #registerForm="ngForm">
-        <div class="input-group">
-          <input type="text" class="auth-input" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
-          <label for="firstName">First Name</label>
-          <i class="material-icons">person</i>
-        </div>
-        
-        <div class="input-group">
-          <input type="text" class="auth-input" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
-          <label for="lastName">Last Name</label>
-          <i class="material-icons">person</i>
-        </div>
-        
-        <div class="input-group">
-          <input type="email" class="auth-input" id="email" [(ngModel)]="user.email" name="email" required (blur)="checkEmail()">
+        <div class="floating-label-group">
+          <input type="email" id="email" [(ngModel)]="user.email" name="email" required (blur)="checkEmail()" placeholder=" ">
           <label for="email">Email</label>
-          <i class="material-icons">email</i>
+          <div class="border-light"></div>
           <mat-error *ngIf="emailError">{{ emailError }}</mat-error>
         </div>
-        
-        <div class="input-group">
-          <input [type]="hidePassword ? 'password' : 'text'" class="auth-input" id="password" [(ngModel)]="user.password" name="password" required>
-          <label for="password">Password</label>
-          <i class="material-icons">lock</i>
-          <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
-            <i class="material-icons">{{hidePassword ? 'visibility_off' : 'visibility'}}</i>
-          </button>
+
+        <div class="floating-label-group">
+          <input type="text" id="firstName" [(ngModel)]="user.firstName" name="firstName" required placeholder=" ">
+          <label for="firstName">First Name</label>
+          <div class="border-light"></div>
         </div>
-        
-        <div class="input-group">
-          <input type="text" class="auth-input" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" (blur)="checkPhone()">
+
+        <div class="floating-label-group">
+          <input type="text" id="lastName" [(ngModel)]="user.lastName" name="lastName" required placeholder=" ">
+          <label for="lastName">Last Name</label>
+          <div class="border-light"></div>
+        </div>
+
+        <div class="floating-label-group">
+          <input [type]="hidePassword ? 'password' : 'text'" id="password" [(ngModel)]="user.password" name="password" required placeholder=" ">
+          <label for="password">Password</label>
+          <div class="border-light"></div>
+          <i class="material-icons toggle-password" (click)="hidePassword = !hidePassword">
+            
+          </i>
+        </div>
+
+        <div class="floating-label-group">
+          <input type="text" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" (blur)="checkPhone()" placeholder=" ">
           <label for="phoneNumber">Phone Number</label>
-          <i class="material-icons">phone</i>
+          <div class="border-light"></div>
           <mat-error *ngIf="phoneError">{{ phoneError }}</mat-error>
         </div>
-        
-        <div class="input-group">
-          <input type="text" class="auth-input" id="address" [(ngModel)]="user.address" name="address">
+
+        <div class="floating-label-group">
+          <input type="text" id="address" [(ngModel)]="user.address" name="address" placeholder=" ">
           <label for="address">Address</label>
-          <i class="material-icons">home</i>
-        </div>
-        
-        <div class="input-group">
-          <mat-select [(ngModel)]="user.roleType" name="roleType">
-            <mat-option value="CLIENT">Client</mat-option>
-            <mat-option value="DEVELOPER">Developer</mat-option>
-            <mat-option value="ADMIN">Admin</mat-option>
-          </mat-select>
-          <label for="roleType">User Role</label>
-          <i class="material-icons">person</i>
-        </div>
-        
-        <div class="input-group">
-          <mat-select [(ngModel)]="user.defaultModel" name="defaultModel">
-            <mat-option value="gpt-4">GPT-4</mat-option>
-            <mat-option value="claude-2">Claude 2</mat-option>
-            <mat-option value="gemini">Gemini</mat-option>
-          </mat-select>
-          <label for="defaultModel">Default AI Model</label>
-          <i class="material-icons">robot</i>
+          <div class="border-light"></div>
         </div>
         
         <div class="terms-agreement">
           <label>
             <input type="checkbox" [(ngModel)]="agreeTerms" name="agreeTerms" required>
             <span class="checkmark"></span>
-            I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+            I agree to the <a href="/terms">Terms</a> and <a href="/privacy">Privacy Policy</a>
           </label>
         </div>
         
         <button class="auth-button" type="submit" [disabled]="emailError || phoneError">
           <span>Create Account</span>
-          <i class="material-icons">arrow_forward</i>
         </button>
       </form>
       
-      <div class="divider">
-        <span>OR</span>
-      </div>
-      
-      <div class="social-auth">
-        <button class="social-button google">
-          <i class="fab fa-google"></i>
-        </button>
-        <button class="social-button apple">
-          <i class="fab fa-apple"></i>
-        </button>
-      </div>
-      
       <div class="auth-footer">
         <span>Already have an account?</span>
-        <a routerLink="/login">Sign In</a>
+        <a href="../login">Sign In</a>
       </div>
+      
+      <div *ngIf="errorMessage" class="error">{{errorMessage}}</div>
     </div>
   </div>
 </div>

@@ -25,17 +25,72 @@ export class LoginComponent {
   rememberMe: boolean = false;
   errorMessage: string = '';
   hidePassword: boolean = true;
+  isLoading: boolean = false;
+  isSuccess: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onSubmit(): void {
+  triggerConfetti() {
+    const canvas = document.createElement('canvas');
+    canvas.style.position = 'fixed';
+    canvas.style.top = '0';
+    canvas.style.left = '0';
+    canvas.style.width = '100vw';
+    canvas.style.height = '100vh';
+    canvas.style.pointerEvents = 'none';
+    canvas.style.zIndex = '1000';
+    document.body.appendChild(canvas);
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    const particles = Array.from({length: 100}, () => ({
+      x: Math.random() * window.innerWidth,
+      y: -10,
+      size: Math.random() * 10 + 5,
+      speed: Math.random() * 3 + 2,
+      color: `hsl(${Math.random() * 60 + 200}, 100%, 50%)`
+    }));
+    
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      particles.forEach(p => {
+        p.y += p.speed;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+      });
+      
+      if (particles.some(p => p.y < window.innerHeight)) {
+        requestAnimationFrame(animate);
+      } else {
+        canvas.remove();
+      }
+    };
+    
+    animate();
+  }
+
+  onSubmit() {
+    if (this.isLoading) return;
+    
+    this.isLoading = true;
+    this.errorMessage = '';
+    
     this.authService.login(this.authRequest).subscribe({
-      next: (response) => {
-        this.authService.setToken(response.token);
-        this.router.navigate(['/user-list']);
+      next: () => {
+        this.isSuccess = true;
+        this.triggerConfetti();
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1500);
       },
       error: (err) => {
         this.errorMessage = err.message;
+        this.isLoading = false;
+      },
+      complete: () => {
+        this.isLoading = false;
       }
     });
   }
