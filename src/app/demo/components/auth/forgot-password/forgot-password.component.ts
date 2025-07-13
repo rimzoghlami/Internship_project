@@ -27,7 +27,7 @@ import { AuthService } from '../../../services/auth.service';
 })
 export class ForgotPasswordComponent {
   email: string = '';
-  message: string = '';
+  successMessage: string = '';
   errorMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -35,8 +35,9 @@ export class ForgotPasswordComponent {
   onSubmit(): void {
     this.authService.forgotPassword(this.email).subscribe({
       next: (response: any) => {
-        this.message = response.message;
-        // Optionally navigate or show a success message
+        this.successMessage = response.message || 'A password reset link has been sent to your email.';
+        // Redirect to the reset-password page with the email address
+        this.router.navigate(['/auth/reset-password'], { queryParams: { email: this.email } });
       },
       error: (err) => {
         this.errorMessage = err.error.message || 'An error occurred. Please try again.';

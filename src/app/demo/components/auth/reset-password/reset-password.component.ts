@@ -36,10 +36,12 @@ export class ResetPasswordComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.token = this.route.snapshot.queryParamMap.get('token') || '';
-    if (!this.token) {
-      this.errorMessage = 'Invalid reset token. Please request a new reset link.';
-      this.router.navigate(['/forgot-password']);
+    this.route.queryParams.subscribe(params => {
+      this.email = params['email'];
+    });
+
+    if (!this.email) {
+      this.errorMessage = 'No email provided. Please go back to the forgot password page and try again.';
     }
   }
 
@@ -49,17 +51,24 @@ export class ResetPasswordComponent implements OnInit {
       return;
     }
 
-    // Assuming resetPassword method signature in AuthService expects email as first parameter
-    // You'll need to adjust this based on your actual AuthService implementation
-    // If email is needed, it should be passed here
-    // For now, I'll assume it's not needed since it's not in the component
-    this.authService.resetPassword(this.token, this.newPassword, '').subscribe({
+    this.authService.resetPassword(this.email, this.otp, this.newPassword).subscribe({
       next: (response) => {
-        this.message = response.message;
-        setTimeout(() => this.router.navigate(['/login']), 3000);
+        this.message = response.message || 'Your password has been reset successfully.';
+        // Navigate to the login page after a short delay
+        setTimeout(() => {
+          this.router.navigate(['/auth/login']);
+        }, 2000);
       },
       error: (err) => {
-        this.errorMessage = err.error.message || 'An error occurred. Please try again.';
+        if (err.error && typeof err.error.message === 'string') {
+          this.errorMessage = err.error.message;
+        } else if (typeof err.error === 'string') {
+          this.errorMessage = err.error;
+        } else if (err.message) {
+          this.errorMessage = err.message;
+        } else {
+          this.errorMessage = 'An unknown error occurred. Please try again.';
+        }
       }
     });
   }

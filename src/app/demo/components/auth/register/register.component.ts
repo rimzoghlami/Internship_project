@@ -41,6 +41,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  navigateToLogin(): void {
+    this.router.navigate(['/auth/login']);
+  }
+
   checkEmail(): void {
     this.authService.checkEmailUnique(this.user.email).subscribe({
       next: (isUnique) => {
@@ -65,8 +69,8 @@ export class RegisterComponent implements OnInit {
     }
     this.authService.register(this.user).subscribe({
       next: (response) => {
-        this.authService.setToken(response.token);
-        this.router.navigate(['/user-list']);
+        // Redirect to login page after successful registration
+        this.router.navigate(['/auth/login']);
       },
       error: (err) => {
         this.errorMessage = err.message;

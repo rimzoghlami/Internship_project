@@ -1,97 +1,45 @@
-<div class="auth-container">
-  <div class="particles"></div>
+<div class="futuristic-profile-container">
+  <div class="background-shapes">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
 
-  <div class="auth-card">
-    <div class="card-border"></div>
-
-    <div class="card-content">
-      <!-- Header -->
-      <div class="auth-header">
-        <h1>Edit Your Profile</h1>
-        <p>Keep your information up to date</p>
+  <mat-card class="profile-card glass-effect" *ngIf="user">
+    <mat-card-header class="profile-card-header">
+      <div class="avatar-wrapper">
+        <img mat-card-avatar [src]="user.avatar || 'assets/demo/images/avatar/default.png'" alt="User Avatar" class="profile-avatar">
       </div>
+      <div class="header-text">
+        <mat-card-title class="profile-name">{{ user.firstName }} {{ user.lastName }}</mat-card-title>
+        <mat-card-subtitle class="profile-role">{{ user.roleType }}</mat-card-subtitle>
+      </div>
+    </mat-card-header>
 
-      <!-- Avatar Upload -->
-      <div class="avatar-container">
-  <div class="avatar-wrapper">
-    <img [src]="user.avatar || 'src/assets/demo/images/avatar/p.png' " class="avatar-preview" alt="Avatar">
-    <label for="avatarUpload" class="avatar-upload">
-      <i class="pi pi-camera"></i>
-    </label>
-  </div>
-  <input type="file" id="avatarUpload" (change)="onAvatarChange($event)" accept="image/*" hidden>
-</div>
+    <mat-card-content class="profile-card-content">
+      <div class="profile-details">
+        <div class="detail-item">
+          <mat-icon class="detail-icon">email</mat-icon>
+          <span class="detail-text">{{ user.email }}</span>
+        </div>
+        <div class="detail-item">
+          <mat-icon class="detail-icon">phone</mat-icon>
+          <span class="detail-text">{{ user.phoneNumber }}</span>
+        </div>
+        <div class="detail-item">
+          <mat-icon class="detail-icon">location_on</mat-icon>
+          <span class="detail-text">{{ user.address }}</span>
+        </div>
+      </div>
+    </mat-card-content>
 
-      <form (ngSubmit)="onSubmit()" #profileForm="ngForm">
-        <!-- Name Row -->
-        
-        <div class="form-row">
-  <div class="form-group">
-    <label for="firstName">First Name</label>
-    <div class="input-group">
-      <i class="pi pi-user input-icon"></i>
-      <input type="text" class="register-input" id="firstName" [(ngModel)]="user.firstName" name="firstName" required>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label for="lastName">Last Name</label>
-    <div class="input-group">
-      <i class="pi pi-user input-icon"></i>
-      <input type="text" class="register-input" id="lastName" [(ngModel)]="user.lastName" name="lastName" required>
-    </div>
-  </div>
-</div>
-
-
-        <!-- Email -->
-        <!-- Email -->
-  <div class="form-group">
-    <label for="email">Email</label>
-    <div class="input-group">
-      <i class="pi pi-envelope input-icon"></i>
-      <input type="email" class="register-input" id="email" [(ngModel)]="user.email" name="email" readonly>
-    </div>
-  </div>
-
-  <!-- Password -->
-  <div class="form-group">
-    <label for="password">New Password</label>
-    <div class="input-group">
-      <i class="pi pi-lock input-icon"></i>
-      <input [type]="hidePassword ? 'password' : 'text'" class="register-input password-input" id="password" [(ngModel)]="user.password" name="password">
-      <button type="button" class="toggle-password" (click)="hidePassword = !hidePassword">
+    <mat-card-actions class="profile-card-actions">
+      <button mat-stroked-button class="futuristic-button edit-button" (click)="openEditDialog()">
+        <span>Edit Profile</span>
       </button>
-    </div>
-  </div>
-
-  <!-- Phone Number -->
-  <div class="form-group">
-    <label for="phoneNumber">Phone Number</label>
-    <div class="input-group">
-      <i class="pi pi-phone input-icon"></i>
-      <input type="text" class="register-input" id="phoneNumber" [(ngModel)]="user.phoneNumber" name="phoneNumber" (blur)="checkPhone()">
-    </div>
-    <div *ngIf="phoneError" class="error-message">{{ phoneError }}</div>
-  </div>
-
-  <!-- Address -->
-  <div class="form-group">
-    <label for="address">Address</label>
-    <div class="input-group">
-      <i class="pi pi-home input-icon"></i>
-      <input type="text" class="register-input" id="address" [(ngModel)]="user.address" name="address">
-    </div>
-  </div>
-        <!-- Submit Button -->
-        <button class="auth-button" type="submit" [disabled]="phoneError">
-          <span>Update Profile</span>
-        </button>
-      </form>
-
-      <div class="auth-footer">
-        <a routerLink="/dashboard">← Back to Dashboard</a>
-      </div>
-    </div>
-  </div>
+      <button mat-flat-button class="futuristic-button logout-button" (click)="logout()">
+        <span>Logout</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>

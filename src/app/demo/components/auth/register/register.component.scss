@@ -517,6 +517,21 @@
 
 @import 'src/app/demo/styles/auth-shared';
 
+.sign-in-link {
+  background: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  text-decoration: underline;
+  margin-left: 5px;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
 .auth-container {
   // Particle grid background
   background: 
@@ -541,6 +556,18 @@
 @keyframes pulseGlow {
   from { text-shadow: 0 0 10px rgba(110, 142, 251, 0.8); }
   to { text-shadow: 0 0 20px rgba(110, 142, 251, 1); }
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 700px; // Adjust as needed
+  margin: auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
 .holographic-indicator {

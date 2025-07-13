@@ -5,18 +5,12 @@ import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../../models/user';
-<<<<<<< HEAD
-@Component({
-  selector: 'app-user-list',
-  standalone: true,
-  imports: [MatTableModule, MatButtonModule],
-=======
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-user-list',
   standalone: true,
   imports: [MatTableModule, MatButtonModule, CommonModule],
->>>>>>> origin/oumaima
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })

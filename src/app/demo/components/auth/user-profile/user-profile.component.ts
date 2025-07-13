@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { EditProfileDialogComponent } from '../edit-profile-dialog/edit-profile-dialog.component';
 import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/user';
 import { Router } from '@angular/router';
@@ -22,7 +24,8 @@ import { Router } from '@angular/router';
     MatButtonModule,
     MatCardModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.scss']
@@ -45,16 +48,37 @@ export class UserProfileComponent implements OnInit {
   phoneError: string = '';
   hidePassword: boolean = true;
   agreeTerms: boolean = true; // par défaut true car déjà accepté lors de l’inscription
+  isEditMode: boolean = false; // This will be replaced by the dialog logic
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
-    this.authService.getCurrentUser().subscribe({
-      next: (userData) => {
-        this.user = { ...userData, password: '' }; // on ne récupère jamais le vrai mot de passe
-      },
-      error: () => {
-        this.errorMessage = "Unable to load user data";
+    // Populate user with static data as requested
+    this.user = {
+      ...this.user,
+      firstName: 'Rim',
+      lastName: 'Zoghlami',
+      email: 'zoghlamirim116@gmail.com',
+      phoneNumber: '21930811',
+      address: 'Tunis',
+      roleType: 'User', // Assign a default role
+      avatar: 'assets/demo/images/avatar/amyelsner.png' // Add a default avatar
+    };
+  }
+
+  openEditDialog(): void {
+    const dialogRef = this.dialog.open(EditProfileDialogComponent, {
+      width: '500px',
+      data: this.user,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.user = result;
       }
     });
   }
@@ -84,11 +108,17 @@ export class UserProfileComponent implements OnInit {
       next: () => {
         this.router.navigate(['/dashboard']); // ou tout autre page
       },
-      error: (err) => {
+      error: (err: Error) => {
         this.errorMessage = err.message;
       }
     });
   }
+  // Fonction pour gérer le changement d'avatar
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/auth/login']);
+  }
+
   // Fonction pour gérer le changement d'avatar
 onAvatarChange(event: any): void {
   const file = event.target.files[0];

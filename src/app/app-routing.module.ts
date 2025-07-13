@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
 import { MydashboardComponent } from './demo/components/mydashboard/mydashboard.component';
+import { UserProfileComponent } from './demo/components/auth/user-profile/user-profile.component';
 
 
 
@@ -25,6 +26,7 @@ import { MydashboardComponent } from './demo/components/mydashboard/mydashboard.
                     
                     // Dashboard
                     { path: 'mydashboard', component: MydashboardComponent },
+                    { path: 'user-profile', component: UserProfileComponent },
 
                     
 

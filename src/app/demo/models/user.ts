@@ -13,8 +13,5 @@ export interface User {
   createdAt?: string;
   updatedAt?: string;
   lastLogin?: string;
-<<<<<<< HEAD
-=======
   avatar?: string;
->>>>>>> origin/oumaima
 }

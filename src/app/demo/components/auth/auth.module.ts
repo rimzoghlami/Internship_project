@@ -11,6 +11,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditProfileDialogComponent } from './edit-profile-dialog/edit-profile-dialog.component';
 
 @NgModule({
     imports: [
@@ -24,7 +27,9 @@ import { MatSelectModule } from '@angular/material/select';
         MatButtonModule,
         MatCardModule,
         MatTableModule,
-        MatSelectModule
+        MatSelectModule,
+        MatIconModule,
+        MatDialogModule
     ],
     declarations: []
 })

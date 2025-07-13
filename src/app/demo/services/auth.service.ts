@@ -34,9 +34,8 @@ export class AuthService {
   }
 
   resetPassword(email: string, otp: string, newPassword: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/reset-password`, null, {
-      params: { email, otp, newPassword }
-    }).pipe(
+    const body = { email, otp, newPassword };
+    return this.http.post(`${this.apiUrl}/reset-password`, body).pipe(
       catchError(this.handleError)
     );
   }
@@ -84,6 +83,20 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('role');
+  }
+
+  getCurrentUser(): Observable<User> {
+    const userId = this.getUserId();
+    return this.http.get<User>(`http://localhost:8089/tests/users/${userId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateProfile(user: User): Observable<User> {
+    const userId = this.getUserId();
+    return this.http.put<User>(`http://localhost:8089/tests/users/${userId}`, user).pipe(
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {

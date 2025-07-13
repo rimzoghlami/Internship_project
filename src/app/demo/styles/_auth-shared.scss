@@ -2,7 +2,7 @@
 
 /* Base container styles */
 .auth-container {
-<<<<<<< HEAD
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -21,15 +21,7 @@
     height: 200%;
     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
     animation: float 15s infinite linear;
-=======
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: radial-gradient(circle at 10% 20%, #1a1a2e 0%, #16213e 90%);
-  position: relative;
-  overflow: hidden;
-  perspective: 1000px;
+  }
 }
 
 /* Particle background */
@@ -48,13 +40,12 @@
     height: 100%;
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="0.5" fill="white" opacity="0.5"/></svg>') repeat;
     animation: particles 120s linear infinite;
->>>>>>> origin/oumaima
   }
 }
 
 /* Card styles */
 .auth-card {
-<<<<<<< HEAD
+
   position: relative;
   width: 100%;
   max-width: 420px;
@@ -285,23 +276,6 @@
 @keyframes float {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
-=======
-  width: 420px;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 24px;
-  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2px;
-  position: relative;
-  z-index: 1;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-  
-  &:hover {
-    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
-    box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3);
-  }
 }
 
 /* Gradient border */
@@ -323,27 +297,14 @@
   border-radius: 24px;
   padding: 2.5rem;
   color: white;
->>>>>>> origin/oumaima
+
 }
 
 /* Header styles */
 .auth-header {
   text-align: center;
   margin-bottom: 2rem;
-<<<<<<< HEAD
 
-  h2 {
-    color: white;
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-
-  p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-=======
-  
   h1 {
     color: white;
     font-size: 2rem;
@@ -432,41 +393,15 @@
   
   &:active {
     transform: translateY(0);
->>>>>>> origin/oumaima
+
   }
 }
 
 /* Footer styles */
 .auth-footer {
-<<<<<<< HEAD
+
   margin-top: 1.5rem;
   text-align: center;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-
-  a {
-    color: white;
-    text-decoration: none;
-    margin-left: 5px;
-    font-weight: 500;
-    position: relative;
-
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: white;
-      transition: width 0.3s ease;
-    }
-
-    &:hover::after {
-      width: 100%;
-=======
-  text-align: center;
-  margin-top: 1.5rem;
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.7);
   
@@ -479,12 +414,11 @@
     
     &:hover {
       text-decoration: underline;
->>>>>>> origin/oumaima
+
     }
   }
 }
 
-<<<<<<< HEAD
 /* Message styles */
 .success, .error {
   padding: 0.8rem;
@@ -502,73 +436,6 @@
 .error {
   background: rgba(229, 57, 53, 0.2);
   color: #e53935;
-=======
-/* Divider */
-.divider {
-  position: relative;
-  text-align: center;
-  margin: 1.5rem 0;
-  color: rgba(255, 255, 255, 0.5);
-  
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-  }
-  
-  span {
-    position: relative;
-    display: inline-block;
-    padding: 0 1rem;
-    background: rgba(20, 20, 40, 0.7);
-  }
-}
 
-/* Social buttons */
-.social-button {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-  color: white;
-  font-size: 1.2rem;
-  transition: all 0.3s ease;
-  border: none;
-  cursor: pointer;
-  
-  &.google {
-    background: #db4437;
-    &:hover { background: #c1351a; }
-  }
-  
-  &.apple {
-    background: #000;
-    &:hover { background: #333; }
-  }
-  
-  &.fingerprint {
-    background: #00ffcc;
-    color: #16213e;
-    &:hover { background: #00ccff; }
-  }
-}
 
-/* Animations */
-@keyframes particles {
-  from { background-position: 0 0; }
-  to { background-position: 10000px 10000px; }
-}
-
-@keyframes gradientBorder {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
->>>>>>> origin/oumaima
 }

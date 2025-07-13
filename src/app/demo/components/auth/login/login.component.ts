@@ -12,6 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '../../../services/auth.service';
 import { AuthRequest } from '../../../models/auth-request.model';
+import { AuthResponse } from '../../../models/auth-response.model';
 
 @Component({
   selector: 'app-login',
@@ -71,6 +72,14 @@ export class LoginComponent {
     animate();
   }
 
+  navigateToForgotPassword(): void {
+    this.router.navigate(['/auth/forgot-password']);
+  }
+
+  navigateToRegister(): void {
+    this.router.navigate(['/auth/register']);
+  }
+
   onSubmit() {
     if (this.isLoading) return;
     
@@ -78,11 +87,12 @@ export class LoginComponent {
     this.errorMessage = '';
     
     this.authService.login(this.authRequest).subscribe({
-      next: () => {
+      next: (response: AuthResponse) => {
+        this.authService.setToken(response.token);
         this.isSuccess = true;
         this.triggerConfetti();
         setTimeout(() => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/user-profile']);
         }, 1500);
       },
       error: (err) => {
