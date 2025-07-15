@@ -22,10 +22,13 @@ export class AuthService {
   }
 
   login(authRequest: AuthRequest): Observable<AuthResponse> {
+    localStorage.clear();
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, authRequest).pipe(
       catchError(this.handleError)
     );
+
   }
+
 
   forgotPassword(email: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/forgot-password`, null, { params: { email } }).pipe(
@@ -55,8 +58,10 @@ export class AuthService {
   setToken(token: string): void {
     localStorage.setItem('token', token);
     const decoded: any = jwtDecode(token);
+    localStorage.clear();
     localStorage.setItem('userId', decoded.id);
     localStorage.setItem('role', decoded.role);
+  
   }
 
   getToken(): string | null {
@@ -87,14 +92,14 @@ export class AuthService {
 
   getCurrentUser(): Observable<User> {
     const userId = this.getUserId();
-    return this.http.get<User>(`http://localhost:8089/tests/users/${userId}`).pipe(
+    return this.http.get<User>(`http://localhost:8089/tests/user/getbyid/${userId}`).pipe(
       catchError(this.handleError)
     );
   }
 
   updateProfile(user: User): Observable<User> {
     const userId = this.getUserId();
-    return this.http.put<User>(`http://localhost:8089/tests/users/${userId}`, user).pipe(
+    return this.http.put<User>(`http://localhost:8089/tests/user/getbyid/${userId}`, user).pipe(
       catchError(this.handleError)
     );
   }

@@ -57,17 +57,11 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Populate user with static data as requested
-    this.user = {
-      ...this.user,
-      firstName: 'Rim',
-      lastName: 'Zoghlami',
-      email: 'zoghlamirim116@gmail.com',
-      phoneNumber: '21930811',
-      address: 'Tunis',
-      roleType: 'User', // Assign a default role
-      avatar: 'assets/demo/images/avatar/amyelsner.png' // Add a default avatar
-    };
+   this.authService.getCurrentUser().subscribe({
+    next: (user: User) => {
+      this.user = user;
+    }
+   })
   }
 
   openEditDialog(): void {

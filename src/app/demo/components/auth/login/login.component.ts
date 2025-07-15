@@ -81,6 +81,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
+    localStorage.clear(); 
     if (this.isLoading) return;
     
     this.isLoading = true;
